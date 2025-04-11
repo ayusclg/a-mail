@@ -3,7 +3,6 @@ import { sendmail } from "./nodemailer.js";
 const send = async (req, res) => {
   try {
     const { to, subject, message, html } = req.body;
-    console.log(req.body);
 
     const sendamail = await sendmail({
       to,
@@ -11,7 +10,7 @@ const send = async (req, res) => {
       text: message,
       html,
     });
-    console.log(sendamail.response);
+
     if (!sendamail) {
       return res.status(400).json({
         message: "Mail not send",
