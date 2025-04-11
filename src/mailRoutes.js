@@ -3,6 +3,6 @@ import { send } from "./mailController.js";
 
 const router = Router();
 
-router.route("/send", send);
+router.route("/send").post(send);
 
 export default router;

@@ -1,24 +1,31 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+
+dotenv.config();
+const user = "prince5@ethereal.email";
+const pass = "Z59Ka3A6BbR9SG5vzD";
 
 const transport = nodemailer.createTransport({
-  service: "",
+  host: "smtp.ethereal.email",
+  port: 587,
   auth: {
-    user: "",
-    pass: "",
+    user,
+    pass,
   },
 });
 
-const sendmail = async (to, html, subject, message) => {
+const sendmail = async ({ to, html, subject, text }) => {
   const mailOptions = {
-    to,
     from: user,
+    to,
     html,
     subject,
-    message,
+    text,
   };
   try {
     const info = await transport.sendMail(mailOptions);
     console.log(info.response);
+    return info;
   } catch (error) {
     console.log("error in sending mail", error);
   }
